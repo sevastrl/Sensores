@@ -70,4 +70,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                tvLatitude.text = "Latitud: ${location.latitude}"
+                tvLongitude.text = "Longitud: ${location.longitude}"
+            } else {
+                tvLatitude.text = "Latitud: No disponible"
+                tvLongitude.text = "Longitud: No disponible"
+            }
+        }.addOnFailureListener {
+            tvLatitude.text = "Error al obtener ubicación"
+            tvLongitude.text = "Reintente más tarde"
+        }
+    }
+
 }
