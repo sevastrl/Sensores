@@ -86,4 +86,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Registra el listener para el acelerómetro
+        accelerometer?.let {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Detiene el listener para ahorrar batería
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null && event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
+            tvGravimeter.text = "Gravímetro (X, Y, Z):\nX: $x\nY: $y\nZ: $z"
+        }
+    }
+
 }
