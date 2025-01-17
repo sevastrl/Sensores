@@ -1,4 +1,5 @@
 Sebastian Coronado - Función: override fun onCreate(savedInstanceState: Bundle?)
+
 Alejandro Quiroz - Función: private fun checkLocationPermission()
 
 
