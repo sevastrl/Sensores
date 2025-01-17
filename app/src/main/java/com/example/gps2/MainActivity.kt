@@ -109,4 +109,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation()
+            } else {
+                tvLatitude.text = "Permiso denegado"
+                tvLongitude.text = "No se puede acceder a la ubicación"
+            }
+        }
+    }
+
 }
