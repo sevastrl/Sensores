@@ -51,6 +51,23 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             checkLocationPermission()
         }
     }
-
+    private fun checkLocationPermission() {
+        // Verifica si el permiso está otorgado
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Si el permiso está otorgado, obtiene la ubicación
+            getLocation()
+        } else {
+            // Si no está otorgado, solicita el permiso
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
 
 }
